@@ -28,9 +28,9 @@ public class LagBehind : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         
-        time += Time.deltaTime;
-        Debug.Log(time + "  delta time: " + Time.deltaTime);
-        if (time > delay /*&& !other.transform.position.Equals(transform.position)*/)
+        //time += Time.deltaTime;
+        //Debug.Log(time + "  delta time: " + Time.deltaTime);
+        //if (time > delay /*&& !other.transform.position.Equals(transform.position)*/)
         {
             speed = Vector3.Distance(other.transform.position, transform.position) / Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, other.transform.position, 20f * Time.deltaTime);
