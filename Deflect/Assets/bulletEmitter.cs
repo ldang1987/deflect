@@ -18,8 +18,8 @@ public class bulletEmitter : MonoBehaviour {
     // Use this for initialization
     void Start () {
         bulletVelocity.x = (-1) * fireSpeed;
-        targetRotation = Quaternion.LookRotation(targets[0].transform.position - transform.position);
-        Debug.Log("location: " + targetRotation);
+        //targetRotation = Quaternion.LookRotation(targets[0].transform.position - transform.position);
+        //Debug.Log("location: " + targetRotation);
 	}
 	
 	// Update is called once per frame
@@ -32,7 +32,7 @@ public class bulletEmitter : MonoBehaviour {
             //Vector3 tempRotation = targetLocation;
             //Quaternion.Euler(tempRotation)
             Vector3 tempRotation = new Vector3(0.0f, 0.0f, 90.0f);
-            GameObject bulletPredictor = Instantiate(bulletScaler, this.transform.position, tempRotation) as GameObject;
+            GameObject bulletPredictor = Instantiate(bulletScaler, this.transform.position, Quaternion.Euler(tempRotation)) as GameObject;
 
         }
 	}
@@ -43,7 +43,7 @@ public class bulletEmitter : MonoBehaviour {
 
         //Vector3 tempRotation = targetLocation;
         Vector3 tempRotation = new Vector3(0.0f, 0.0f, 90.0f);
-        GameObject instance = Instantiate(bulletPrefab, this.transform.position, tempRotation) as GameObject;
+        GameObject instance = Instantiate(bulletPrefab, this.transform.position, Quaternion.Euler(tempRotation)) as GameObject;
         instance.GetComponent<Rigidbody>().velocity = bulletVelocity;
     }
 
