@@ -34,6 +34,7 @@ public class Clone : MonoBehaviour {
 
             GameObject temp = Instantiate(cloneSword, pos, transform.rotation) as GameObject;
             temp.transform.parent = gameObject.transform;
+
            
         }
 

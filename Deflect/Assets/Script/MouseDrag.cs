@@ -32,7 +32,7 @@ public class MouseDrag : MonoBehaviour {
 
     void Update()
     {
-        transform.Rotate(rotate * Time.deltaTime, 0, 0);
+        //transform.Rotate(rotate * Time.deltaTime, 0, 0);
     }
 
 
