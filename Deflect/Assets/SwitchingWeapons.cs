@@ -28,7 +28,8 @@ public class SwitchingWeapons : MonoBehaviour {
 	void Update () {
 
 
-        if (SteamVR_Controller.Input(4).GetPressDown(SteamVR_Controller.ButtonMask.Grip))
+        if (SteamVR_Controller.Input(4).GetPressDown(SteamVR_Controller.ButtonMask.Grip)
+            || Input.GetKeyDown("z"))
         {
             //Debug.Log("press grip");
             if(arrayOfSwords.Length > 0)
@@ -37,6 +38,7 @@ public class SwitchingWeapons : MonoBehaviour {
                 arrayOfSwords[count].SetActive(true);
                 currentActive = arrayOfSwords[count];
                 count++;
+                Debug.Log("SWITCHING WEAPONS!!!");
             }
             CheckCount();
         }
