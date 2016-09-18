@@ -45,8 +45,8 @@ public class LagBehind : MonoBehaviour {
         if (differentDistance > swordSize)
         {
             speed = Vector3.Distance(other.transform.position, transform.position);
-            //transform.position = Vector3.MoveTowards(transform.position, other.transform.position, speed);
-            transform.position = Vector3.Lerp(transform.position, other.transform.position, 1f);
+            //transform.position = Vector3.MoveTowards(transform.position, other.transform.position, speed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, other.transform.position, 5f);
             //transform.position = other.transform.position;
         }
 
