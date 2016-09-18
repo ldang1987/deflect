@@ -26,15 +26,13 @@ public class Bullet : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter(Collider collision)    {
-        if(collision.GetComponent<Collider>().gameObject.layer == swordLayer)
-        {
+    void OnCollisionEnter(Collision collision) {
             Debug.Log("Hit Sword");
-            Transform bulletTarget = findDeflectTarget();
-
+            Transform bulletTarget = testTransform.transform; //findDeflectTarget();
+            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+        
             gameObject.transform.LookAt(bulletTarget);
             bulletRB.velocity = transform.forward * bulletSpeed;
-        }
     }
 
     Transform findDeflectTarget()
