@@ -4,6 +4,8 @@ using System.Collections;
 public class Bullet : MonoBehaviour {
 
     [SerializeField] float bulletLife;
+    [SerializeField] GameObject mainCamera;
+
 
     private float dieTime;
     public LayerMask swordLayer;
@@ -15,6 +17,7 @@ public class Bullet : MonoBehaviour {
 	void Start () {
         dieTime = Time.time + bulletLife;
         bulletRB = gameObject.GetComponent<Rigidbody>();
+        mainCamera = GameObject.Find("Main Camera");
 	}
 	
 	// Update is called once per frame
@@ -26,15 +29,21 @@ public class Bullet : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter(Collider collision)    {
-        if(collision.GetComponent<Collider>().gameObject.layer == swordLayer)
-        {
-            Debug.Log("Hit Sword");
-            Transform bulletTarget = findDeflectTarget();
+    void OnCollisionEnter(Collision collision) {
+        Debug.Log("Hit Sword");
+        //Transform bulletTarget = testTransform.transform; //findDeflectTarget();
+        Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
 
-            gameObject.transform.LookAt(bulletTarget);
-            bulletRB.velocity = transform.forward * bulletSpeed;
-        }
+        Vector3 direction = mainCamera.gameObject.transform.forward;
+        Ray lookRay = new Ray(mainCamera.gameObject.transform.position, direction);
+        Vector3 newBulletTarget = lookRay.GetPoint(100);
+
+        gameObject.transform.LookAt(newBulletTarget);
+        bulletRB.velocity = transform.forward * bulletSpeed;
+
+        Vector3 newRotation = gameObject.transform.rotation.ToEuler();
+        newRotation.x -= 90.0f;
+        gameObject.transform.rotation = Quaternion.Euler(newRotation);
     }
 
     Transform findDeflectTarget()
