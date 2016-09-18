@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class swordScript : MonoBehaviour {
+public class swordScriptLightSaber : MonoBehaviour
+{
 
     [SerializeField]
     private Rigidbody swordRigidbody;
@@ -12,40 +13,36 @@ public class swordScript : MonoBehaviour {
     [SerializeField]
     private Vector3 velocity;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         swordRigidbody = gameObject.GetComponent<Rigidbody>();
         oldpos = transform.position;
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-        float flip = 1f;
-        if(transform.rotation.eulerAngles.z < 180 && transform.rotation.eulerAngles.z > 0)
+    // Update is called once per frame
+    void Update()
+    {
+
+        float flip = 1;
+        if (transform.rotation.eulerAngles.z < 180 && transform.rotation.eulerAngles.z > 0)
         {
-            flip = -1f;
+            flip = -1;
         }
 
         newpos = transform.position;
-        //var media = (newpos - oldpos);
-        Vector3 media = (newpos - oldpos);
-        /*if (media.Equals(Vector3.zero))
-        {
-            velocity = media / Time.deltaTime;
-        }*/
-
+        var media = (newpos - oldpos);
         velocity = media / Time.deltaTime;
         oldpos = newpos;
         newpos = transform.position;
 
-        //flip* velocity.z * .015f + .01f
 
-        Vector3 targetScale = new Vector3(.01f, flip * velocity.z * .015f + .01f, .01f);
+
+        Vector3 targetScale = new Vector3(flip * velocity.z * .015f + .05f, .5f, .05f);
         Vector3 newScale = Vector3.Lerp(transform.localScale, targetScale, .5f);
 
         transform.localScale = newScale;
 
         Debug.Log(transform.rotation.eulerAngles);
-	}
+    }
 }
