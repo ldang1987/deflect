@@ -31,7 +31,8 @@ public class bulletEmitter : MonoBehaviour {
             //new Vector3(0.0f, 0.0f, 90.0f)
             //Vector3 tempRotation = targetLocation;
             //Quaternion.Euler(tempRotation)
-            GameObject bulletPredictor = Instantiate(bulletScaler, this.transform.position, targetRotation) as GameObject;
+            Vector3 tempRotation = new Vector3(0.0f, 0.0f, 90.0f);
+            GameObject bulletPredictor = Instantiate(bulletScaler, this.transform.position, tempRotation) as GameObject;
 
         }
 	}
@@ -41,7 +42,8 @@ public class bulletEmitter : MonoBehaviour {
         yield return new WaitForSeconds(time);
 
         //Vector3 tempRotation = targetLocation;
-        GameObject instance = Instantiate(bulletPrefab, this.transform.position, targetRotation) as GameObject;
+        Vector3 tempRotation = new Vector3(0.0f, 0.0f, 90.0f);
+        GameObject instance = Instantiate(bulletPrefab, this.transform.position, tempRotation) as GameObject;
         instance.GetComponent<Rigidbody>().velocity = bulletVelocity;
     }
 
