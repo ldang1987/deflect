@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class bulletEmitter : MonoBehaviour {
+public class bulletEmitterNew : MonoBehaviour {
 
     [SerializeField]
     private GameObject bulletPrefab;
