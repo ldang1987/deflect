@@ -6,12 +6,17 @@ public class bulletEmitter : MonoBehaviour {
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject bulletScaler;
     [SerializeField] float fireSpeed;
+    [SerializeField]
+    private GameObject[] targets;
 
     private Vector3 bulletVelocity;
+    private Quaternion targetRotation;
 
     // Use this for initialization
     void Start () {
         bulletVelocity.x = (-1) * fireSpeed;
+        targetRotation = Quaternion.LookRotation(targets[0].transform.position - transform.position);
+        Debug.Log("location: " + targetRotation);
 	}
 	
 	// Update is called once per frame
@@ -20,8 +25,10 @@ public class bulletEmitter : MonoBehaviour {
             || SteamVR_Controller.Input(4).GetTouchDown(SteamVR_Controller.ButtonMask.Trigger))
         {
             StartCoroutine(spawnBullet(2));
-            Vector3 tempRotation = new Vector3(0.0f, 0.0f, 90.0f);
-            GameObject bulletPredictor = Instantiate(bulletScaler, this.transform. position, Quaternion.Euler(tempRotation)) as GameObject;
+            //new Vector3(0.0f, 0.0f, 90.0f)
+            //Vector3 tempRotation = targetLocation;
+            //Quaternion.Euler(tempRotation)
+            GameObject bulletPredictor = Instantiate(bulletScaler, this.transform.position, targetRotation) as GameObject;
 
         }
 	}
@@ -30,8 +37,8 @@ public class bulletEmitter : MonoBehaviour {
     {
         yield return new WaitForSeconds(time);
 
-        Vector3 tempRotation = new Vector3(0.0f, 0.0f, 90.0f);
-        GameObject instance = Instantiate(bulletPrefab, this.transform.position, Quaternion.Euler(tempRotation)) as GameObject;
+        //Vector3 tempRotation = targetLocation;
+        GameObject instance = Instantiate(bulletPrefab, this.transform.position, targetRotation) as GameObject;
         instance.GetComponent<Rigidbody>().velocity = bulletVelocity;
     }
 
