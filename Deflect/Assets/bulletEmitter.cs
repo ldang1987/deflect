@@ -25,7 +25,7 @@ public class bulletEmitter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	    if(Input.GetKeyDown("e") 
-            || SteamVR_Controller.Input(4).GetTouchDown(SteamVR_Controller.ButtonMask.Trigger))
+            || SteamVR_Controller.Input(2).GetTouchDown(SteamVR_Controller.ButtonMask.Trigger))
         {
             StartCoroutine(spawnBullet(2));
             //new Vector3(0.0f, 0.0f, 90.0f)

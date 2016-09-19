@@ -25,14 +25,14 @@ public class bulletEmitterNew : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	    if(Input.GetKeyDown("e") 
-            || SteamVR_Controller.Input(4).GetTouchDown(SteamVR_Controller.ButtonMask.Trigger))
+            || SteamVR_Controller.Input(2).GetTouchDown(SteamVR_Controller.ButtonMask.Trigger))
         {
             StartCoroutine(spawnBullet(2));
             //new Vector3(0.0f, 0.0f, 90.0f)
             //Vector3 tempRotation = targetLocation;
             //Quaternion.Euler(tempRotation)
             GameObject bulletPredictor = Instantiate(bulletScaler, this.transform.position, targetRotation) as GameObject;
-
+            bulletPredictor.transform.rotation = Quaternion.RotateTowards(bulletPredictor.transform.rotation, targetRotation, 100);
         }
 	}
 
@@ -42,6 +42,7 @@ public class bulletEmitterNew : MonoBehaviour {
 
         //Vector3 tempRotation = targetLocation;
         GameObject instance = Instantiate(bulletPrefab, this.transform.position, targetRotation) as GameObject;
+        instance.transform.rotation = Quaternion.RotateTowards(instance.transform.rotation, targetRotation, 100);
         instance.GetComponent<Rigidbody>().velocity = bulletVelocity;
     }
 
